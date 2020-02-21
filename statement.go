@@ -149,6 +149,10 @@ func (c converter) ConvertValue(v interface{}) (driver.Value, error) {
 		return v, nil
 	}
 
+	if _, ok := v.(Decimal); ok {
+		return v, nil
+	}
+
 	if vr, ok := v.(driver.Valuer); ok {
 		sv, err := callValuerValue(vr)
 		if err != nil {
